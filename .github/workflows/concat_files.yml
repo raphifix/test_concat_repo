@@ -1,0 +1,25 @@
+name: Concatenate Files
+
+on:
+  workflow_dispatch: # Allows manual triggering from the GitHub UI
+  push:
+    branches:
+      - main # Or your default branch
+
+jobs:
+  concatenate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up target directory
+        run: mkdir -p target_dir
+
+      - name: Concatenate files
+        run: |
+          find test_dir -type f -print0 | xargs -0 cat >> target_dir/combined_file.txt
+
+      - name: List target directory contents
+        run: ls -l target_dir # Optional: Verify the output
