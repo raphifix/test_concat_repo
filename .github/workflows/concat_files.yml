@@ -23,3 +23,14 @@ jobs:
 
       - name: List target directory contents
         run: ls -l target_dir # Optional: Verify the output
+
+      - name: Commit and push changes
+        run: |
+          git config --global user.email "raphifix@gmail.com" # Replace with your email
+          git config --global user.name "Raphael Fix" # Replace with your name
+          git add target_dir/combined_file.txt
+          git commit -m "Add concatenated file"
+          git push origin main # Or your branch name
+
+permissions:
+  contents: write
